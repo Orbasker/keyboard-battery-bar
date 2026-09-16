@@ -17,21 +17,34 @@ macOS has no built-in way to see a wireless keyboard's battery level. Many keybo
 
 macOS 13 or later. Xcode command line tools (`xcode-select --install`).
 
-## Build and install
+## Install
+
+One line — downloads, builds, installs the app and the login agent:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Orbasker/keyboard-battery-bar/main/install.sh | bash
+```
+
+With Homebrew, from the tap:
+
+```bash
+brew install orbasker/tap/keyboard-battery-bar
+```
+
+Or from a clone:
 
 ```bash
 git clone https://github.com/Orbasker/keyboard-battery-bar.git
 cd keyboard-battery-bar
-./build.sh
+./build.sh && ./install-agent.sh
 ```
 
-That builds `~/Applications/Keyboard Battery Bar.app` and a CLI at `build/keyboard-battery`.
+All three compile from source, which is deliberate: the app is ad-hoc signed, so a
+pre-built download would be quarantined and refused by Gatekeeper. Building locally
+sidesteps that entirely.
 
-To launch it at login:
-
-```bash
-./install-agent.sh
-```
+Result: `~/Applications/Keyboard Battery Bar.app`, a CLI at `build/keyboard-battery`,
+and a login agent so it starts with you.
 
 ## Grant Input Monitoring
 
