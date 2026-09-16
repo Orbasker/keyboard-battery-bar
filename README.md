@@ -102,6 +102,17 @@ Also note that third-party menu bar items render on the display holding the focu
 
 **It says `!` forever.** Input Monitoring is not granted to *this* build — see above. Re-adding after a rebuild is expected.
 
+## Icon
+
+`resources/AppIcon.icns` is checked in so builds stay hermetic. Rendering it draws
+through AppKit, which needs a GUI session — sandboxed builders like Homebrew have
+none, so generating it at install time fails. To change the artwork, edit
+`src/icon.swift` and regenerate:
+
+```bash
+REGEN_ICON=1 ./build.sh
+```
+
 ## Homebrew tap
 
 `Formula/keyboard-battery-bar.rb` is ready to serve from a personal tap. Homebrew
