@@ -4,7 +4,7 @@ set -euo pipefail
 BUNDLE_ID="com.ortbasker.keyboardbatterybar"
 APP_NAME="Keyboard Battery Bar"
 EXEC_NAME="KeyboardBatteryBar"
-VERSION="1.1"
+VERSION="1.2"
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD="$ROOT/build"
@@ -66,7 +66,7 @@ echo "==> Signing with identity: $SIGN_ID"
 codesign -s "$SIGN_ID" --force --deep "$APP"
 codesign -v "$APP"
 
-/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$APP"
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$APP" 2>/dev/null || true
 
 echo "==> Built $APP"
 echo "    CLI at $BUILD/keyboard-battery"
