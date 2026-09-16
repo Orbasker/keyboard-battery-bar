@@ -19,9 +19,9 @@ WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
 
 echo "==> Downloading $REPO@$REF"
-curl -fsSL "https://codeload.github.com/$REPO/tar.gz/$REF" | tar xz -C "$WORK"
+curl -fsSL "https://codeload.github.com/$REPO/tar.gz/$REF" | tar -xzf - -C "$WORK"
 
-SRC="$(find "$WORK" -maxdepth 1 -type d -name 'keyboard-battery-bar-*' | head -1)"
+SRC="$(/usr/bin/find "$WORK" -maxdepth 1 -type d -name 'keyboard-battery-bar-*' | head -1)"
 [ -n "$SRC" ] || { echo "Download did not contain the expected source tree." >&2; exit 1; }
 
 cd "$SRC"
