@@ -25,7 +25,7 @@ One line — downloads, builds, installs the app and the login agent:
 curl -fsSL https://raw.githubusercontent.com/Orbasker/keyboard-battery-bar/main/install.sh | bash
 ```
 
-With Homebrew, from the tap:
+With Homebrew, once the [tap](#homebrew-tap) exists:
 
 ```bash
 brew install orbasker/tap/keyboard-battery-bar
@@ -101,6 +101,33 @@ A `FBSceneErrorDomain code 2 ("scene-invalidated")` on `…-NSStatusItemView` me
 Also note that third-party menu bar items render on the display holding the focused app, so on a multi-monitor setup check the other screens before assuming it is missing.
 
 **It says `!` forever.** Input Monitoring is not granted to *this* build — see above. Re-adding after a rebuild is expected.
+
+## Homebrew tap
+
+`Formula/keyboard-battery-bar.rb` is ready to serve from a personal tap. Homebrew
+requires a tap repo to be named `homebrew-<name>`, so create `homebrew-tap` and
+copy the formula into it:
+
+```bash
+gh repo create Orbasker/homebrew-tap --public --clone
+cd homebrew-tap && mkdir -p Formula
+curl -fsSLO https://raw.githubusercontent.com/Orbasker/keyboard-battery-bar/main/Formula/keyboard-battery-bar.rb
+mv keyboard-battery-bar.rb Formula/
+git add -A && git commit -m "Add keyboard-battery-bar" && git push
+```
+
+After that `brew install orbasker/tap/keyboard-battery-bar` works for anyone.
+
+Bumping a version means tagging a release, then updating `url` and `sha256` in the
+formula:
+
+```bash
+curl -fsSL https://github.com/Orbasker/keyboard-battery-bar/archive/refs/tags/vX.Y.tar.gz | shasum -a 256
+```
+
+This will not be accepted into homebrew-core — that requires a level of notability
+(stars, forks, watchers) a personal utility will not meet. A tap is the supported
+route for exactly this case.
 
 ## License
 
