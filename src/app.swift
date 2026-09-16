@@ -100,7 +100,7 @@ final class Notifier {
     }
 
     func postTestNotification() {
-        post(title: "Keychron Battery", body: "Notifications are working")
+        post(title: "Keyboard Battery Bar", body: "Notifications are working")
     }
 }
 
@@ -164,7 +164,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         case .permissionDenied: description = "permission denied"
         }
         let directory = FileManager.default.homeDirectoryForCurrentUser
-            .appendingPathComponent("Library/Application Support/keychron-battery")
+            .appendingPathComponent("Library/Application Support/keyboard-battery-bar")
         try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         let line = "\(ISO8601DateFormatter().string(from: Date())) \(description) button=\(statusItem.button != nil) visible=\(statusItem.isVisible) length=\(statusItem.length)\n"
         try? line.write(to: directory.appendingPathComponent("last-state"), atomically: true, encoding: .utf8)

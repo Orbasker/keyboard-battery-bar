@@ -65,7 +65,7 @@ while let arg = args.first {
     case "--match": filter = args.isEmpty ? filter : args.removeFirst()
     case "--help", "-h":
         print("""
-        keychron-battery — read the battery level of HID keyboards that report one
+        keyboard-battery — read the battery level of HID keyboards that report one
 
           --match <text>  device name substring (default: Keychron)
           --all           every device that exposes a battery element

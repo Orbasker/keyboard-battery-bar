@@ -1,9 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
-BUNDLE_ID="com.ortbasker.keychronbattery"
-APP_NAME="Keychron Battery"
-EXEC_NAME="KeychronBattery"
+BUNDLE_ID="com.ortbasker.keyboardbatterybar"
+APP_NAME="Keyboard Battery Bar"
+EXEC_NAME="KeyboardBatteryBar"
 VERSION="1.0"
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -28,7 +28,7 @@ done
 iconutil -c icns "$ICONSET" -o "$BUILD/AppIcon.icns"
 
 echo "==> Building CLI"
-xcrun swiftc -O "$ROOT/src/cli.swift" -o "$BUILD/keychron-battery"
+xcrun swiftc -O "$ROOT/src/cli.swift" -o "$BUILD/keyboard-battery"
 
 echo "==> Building app bundle"
 rm -rf "$APP"
@@ -63,4 +63,4 @@ codesign -v "$APP"
 /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$APP"
 
 echo "==> Built $APP"
-echo "    CLI at $BUILD/keychron-battery"
+echo "    CLI at $BUILD/keyboard-battery"

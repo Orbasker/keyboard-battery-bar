@@ -1,8 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-LABEL="com.ortbasker.keychronbattery.agent"
-APP="${1:-$HOME/Applications/Keychron Battery.app}"
+LABEL="com.ortbasker.keyboardbatterybar.agent"
+APP="${1:-$HOME/Applications/Keyboard Battery Bar.app}"
 PLIST="$HOME/Library/LaunchAgents/$LABEL.plist"
 
 launchctl bootout "gui/$(id -u)/$LABEL" 2>/dev/null || true

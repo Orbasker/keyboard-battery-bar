@@ -1,8 +1,8 @@
-# Keychron Battery
+# Keyboard Battery Bar
 
-A tiny macOS menu bar app that shows the battery level of a Bluetooth Keychron keyboard, plus a CLI that prints the same reading.
+A tiny macOS menu bar app that shows the battery level of a Bluetooth keyboard, plus a CLI that prints the same reading.
 
-macOS has no built-in way to see a Keychron's battery level. The keyboard reports it over HID, so this reads it directly.
+macOS has no built-in way to see a wireless keyboard's battery level. Many keyboards report it over HID anyway, so this reads it straight from the device. Written against a Keychron K1 SE, but the default device filter is just a name substring you can change.
 
 ```
 ⌨ 63%
@@ -25,7 +25,7 @@ cd keyboard-battery-bar
 ./build.sh
 ```
 
-That builds `~/Applications/Keychron Battery.app` and a CLI at `build/keychron-battery`.
+That builds `~/Applications/Keyboard Battery Bar.app` and a CLI at `build/keyboard-battery`.
 
 To launch it at login:
 
@@ -37,7 +37,7 @@ To launch it at login:
 
 Reading the battery means opening the keyboard's HID device, which macOS gates behind **Input Monitoring**. Until you grant it, the menu bar shows an orange `!`.
 
-Open **System Settings → Privacy & Security → Input Monitoring**, click `+`, add `~/Applications/Keychron Battery.app`, enable it, then quit and reopen the app from its own menu.
+Open **System Settings → Privacy & Security → Input Monitoring**, click `+`, add `~/Applications/Keyboard Battery Bar.app`, enable it, then quit and reopen the app from its own menu.
 
 > Because the app is ad-hoc signed, macOS ties the grant to the binary's code hash. **Every rebuild invalidates it** and you have to add it again. To avoid that, sign with a stable self-signed identity and pass it through:
 >
@@ -48,13 +48,13 @@ Open **System Settings → Privacy & Security → Input Monitoring**, click `+`,
 ## CLI
 
 ```bash
-$ keychron-battery
+$ keyboard-battery
 Keychron K1 SE: 63%
 
-$ keychron-battery --json
+$ keyboard-battery --json
 [{"name":"Keychron K1 SE","percent":63}]
 
-$ keychron-battery --quiet
+$ keyboard-battery --quiet
 63
 ```
 
@@ -69,10 +69,10 @@ Exit codes: `0` found, `1` no matching device, `3` missing Input Monitoring.
 
 ## Other keyboards
 
-Nothing here is Keychron-specific — it reads HID usage page `0x06`, usage `0x20`, which any keyboard may expose. Try `keychron-battery --all` to see what your hardware reports, then run the app with a different filter:
+Nothing here is Keychron-specific — it reads HID usage page `0x06`, usage `0x20`, which any keyboard may expose. Try `keyboard-battery --all` to see what your hardware reports, then run the app with a different filter:
 
 ```bash
-defaults write com.ortbasker.keychronbattery deviceFilter -string "Logitech"
+defaults write com.ortbasker.keyboardbatterybar deviceFilter -string "Logitech"
 ```
 
 ## Troubleshooting
@@ -80,7 +80,7 @@ defaults write com.ortbasker.keychronbattery deviceFilter -string "Logitech"
 **The app runs but no icon appears.** The status item is hosted by Control Center. Check whether it is refusing to place the item:
 
 ```bash
-log show --last 5m --predicate 'process == "KeychronBattery"' --style compact | grep -i scene
+log show --last 5m --predicate 'process == "KeyboardBatteryBar"' --style compact | grep -i scene
 ```
 
 A `FBSceneErrorDomain code 2 ("scene-invalidated")` on `…-NSStatusItemView` means Control Center never allocated a menu bar slot, and the item is parked off-screen. Changing `BUNDLE_ID` in `build.sh` to a fresh identifier clears it.
