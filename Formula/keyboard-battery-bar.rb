@@ -5,8 +5,8 @@ class KeyboardBatteryBar < Formula
   sha256 "ca81315b2f1c78931b1d59deba604c1c267a999d7283ff2f9f75770cfe8533f0"
   license "MIT"
 
-  depends_on :macos
   depends_on xcode: :build
+  depends_on :macos
 
   def install
     system "./build.sh", "#{prefix}/Keyboard Battery Bar.app"
