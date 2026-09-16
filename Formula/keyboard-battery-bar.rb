@@ -1,8 +1,8 @@
 class KeyboardBatteryBar < Formula
   desc "Menu bar battery level for Bluetooth keyboards, plus a CLI"
   homepage "https://github.com/Orbasker/keyboard-battery-bar"
-  url "https://github.com/Orbasker/keyboard-battery-bar/archive/refs/tags/v1.1.tar.gz"
-  sha256 "7249630ca136fd9b73afa37e9ad439b66294ebdb5775c7ae9a20c6de6cee9056"
+  url "https://github.com/Orbasker/keyboard-battery-bar/archive/refs/tags/v1.2.tar.gz"
+  sha256 "e96a5fcb78f252003b44b3498de2694491db6dd9229cdb0fb6cd292a835a98ea"
   license "MIT"
 
   depends_on xcode: :build
